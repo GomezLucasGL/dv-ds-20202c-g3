@@ -10,25 +10,16 @@ public class PrendaTests {
 
     @Test
     void testBuilder() {
-/*
+
         Long id = 1L;
         String camisa = "camisa";
         TipoPrenda tipo = TipoPrenda.CAMISA;
         BigDecimal precio = new BigDecimal(10.2D);
 
-        Prenda testPrenda = new Prenda();
-
-                testPrenda.builder()
-                .id(1L)
-                .descripcion("camisa")
-                .tipo(TipoPrenda.CAMISA)
-                .precioBase(new BigDecimal(10.2D))
-                .build();
+        Prenda testPrenda = new Prenda(1L,new BigDecimal(10.2D),TipoPrenda.CAMISA, "camisa");
 
      assertNotNull(testPrenda);
-     assertEquals(id, prenda.getId());
+     assertEquals(id, testPrenda.getId());
 
-     fail("Not yet implemented");
-*/
     }
 }

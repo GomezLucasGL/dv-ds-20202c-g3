@@ -24,9 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "prendas")
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
+@Builder
 public class Prenda {
 
     @Id
@@ -45,6 +43,47 @@ public class Prenda {
 
     @Column(name = "prd_description")
     private String descripcion;
+
+    public Prenda(Long id, BigDecimal precioBase, TipoPrenda tipo, String descripcion) {
+        this.id = id;
+        this.precioBase = precioBase;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+    }
+
+    public Prenda() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getPrecioBase() {
+        return precioBase;
+    }
+
+    public void setPrecioBase(BigDecimal precioBase) {
+        this.precioBase = precioBase;
+    }
+
+    public TipoPrenda getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPrenda tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
 
 
