@@ -1,6 +1,5 @@
 package ar.edu.davinci.dvds20202cg3.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import jdk.nashorn.internal.runtime.Debug;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +22,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "prendas")
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Prenda {
 
@@ -43,15 +43,6 @@ public class Prenda {
 
     @Column(name = "prd_description")
     private String descripcion;
-
-    public Prenda(Long id, BigDecimal precioBase, TipoPrenda tipo, String descripcion) {
-        this.id = id;
-        this.precioBase = precioBase;
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-    }
-
-    public Prenda() {}
 
     public Long getId() {
         return id;
