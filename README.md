@@ -9,9 +9,9 @@ Gomez Lucas, Mariana Suarez Del Cerro, Florencia Verratti
 
 # Tests
 
-Install Lombok
-IntelliJ IDEAL: https://projectlombok.org/setup/intellij
-NetBeans:
+1. Install Lombok
+1.1. IntelliJ IDEAL: https://projectlombok.org/setup/intellij
+1.2. NetBeans:
 
 # Script Base de datos
 
