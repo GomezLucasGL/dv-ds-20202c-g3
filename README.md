@@ -17,6 +17,18 @@ Gomez Lucas, Mariana Suarez Del Cerro, Florencia Verratti
 
 CREATE DATABASE `dv-ds-20202c-g3`
 
+// Table (se crea sola cuando corre el proyecto)
+
+DROP IF EXISTS `prendas`;
+
+CREATE TABLE `prendas` (
+  `prd_id` bigint NOT NULL AUTO_INCREMENT,
+  `prd_description` varchar(255) DEFAULT NULL,
+  `prd_precio_base` decimal(19,2) DEFAULT NULL,
+  `prd_tipo_prenda` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`prd_id`)
+)
+
 // Insert de prueba:
 
 INSERT INTO `prendas`
