@@ -6,7 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path="/tienda/api")
 public abstract class TiendaAppRest {
-
-
-
 }
+
