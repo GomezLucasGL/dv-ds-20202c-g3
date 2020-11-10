@@ -4,6 +4,9 @@ import ar.edu.davinci.dvds20202cg3.controller.TiendaAppRest;
 import ar.edu.davinci.dvds20202cg3.model.Prenda;
 import ar.edu.davinci.dvds20202cg3.service.PrendaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +18,18 @@ public class PrendaController extends TiendaAppRest {
     @Autowired
     private PrendaService prendaService;
 
-    @GetMapping(name = "/prendas")
+    @GetMapping(name = "/prendas/all")
     public List<Prenda> getListAll() {
 
         return prendaService.listAll();
 
     }
+/*
+    @GetMapping(name = "/prendas")
+    public Page<Prenda> getList(Pageable pageable) {
 
+        return prendaService.list(pageable);
+
+    }
+*/
 }

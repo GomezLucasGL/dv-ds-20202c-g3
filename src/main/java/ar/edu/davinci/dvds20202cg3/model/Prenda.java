@@ -1,5 +1,4 @@
 package ar.edu.davinci.dvds20202cg3.model;
-
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -19,7 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "prendas")
+@Table(name="prendas")
 
 @Data
 @NoArgsConstructor
@@ -43,38 +42,4 @@ public class Prenda {
 
     @Column(name = "prd_description")
     private String descripcion;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getPrecioBase() {
-        return precioBase;
-    }
-
-    public void setPrecioBase(BigDecimal precioBase) {
-        this.precioBase = precioBase;
-    }
-
-    public TipoPrenda getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoPrenda tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }
-
-
