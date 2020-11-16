@@ -3,8 +3,7 @@ package ar.edu.davinci.dvds20202cg3.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import ar.edu.davinci.dvds20202cg3.model.TipoPrenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PrendaServiceImpl implements PrendaService {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(PrendaServiceImpl.class);
 
     private final PrendaRepository prendaRepository;
 
@@ -32,7 +29,6 @@ public class PrendaServiceImpl implements PrendaService {
 
     @Override
     public Page<Prenda> list(Pageable pageable) {
-        LOGGER.info("Pagegable: offset: " + pageable.getOffset() + " - pageSize:" + pageable.getPageSize());
         return prendaRepository.findAll(pageable);
     }
 
@@ -47,7 +43,6 @@ public class PrendaServiceImpl implements PrendaService {
 
     @Override
     public Prenda save(Prenda prenda) {
-        // TODO Auto-generated method stub
         return prendaRepository.save(prenda);
     }
 
@@ -56,4 +51,21 @@ public class PrendaServiceImpl implements PrendaService {
         prendaRepository.delete(prenda);
     }
 
+    @Override
+    public void delete(Long id) {
+        prendaRepository.deleteById(id);
+    }
+
+    @Override
+    public long count() {
+        return prendaRepository.count();
+    }
+
+    @Override
+    public List<TipoPrenda> getTipoPrendas() {
+        return TipoPrenda.getTipoPrendas();
+    }
+
+
 }
+
