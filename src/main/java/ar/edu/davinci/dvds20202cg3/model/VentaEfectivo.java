@@ -1,12 +1,12 @@
 package ar.edu.davinci.dvds20202cg3.model;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.io.Serializable;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "vnt_id")
@@ -15,11 +15,14 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public class VentaEfectivo extends Venta {
+public class VentaEfectivo implements Serializable {
 
-    @Override
-    public Double conRecargo(Double importeBase) {
-        return importeBase;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "vta_id")
+    private Long id;
+    private static final long serialVersionUID = -8393218825317899807L;
+
 
 }

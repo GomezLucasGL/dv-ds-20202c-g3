@@ -1,11 +1,10 @@
 package ar.edu.davinci.dvds20202cg3.repository;
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.davinci.dvds20202cg3.model.VentaEfectivo;
+import ar.edu.davinci.dvds20202cg3.model.VentaTarjeta;
 
 @Repository
-public interface VentaEfectivoRepository extends JpaRepository<VentaEfectivo, Long> {
+public interface VentaTarjetaRepository extends JpaRepository<VentaTarjeta, Long>  {
+
 }
