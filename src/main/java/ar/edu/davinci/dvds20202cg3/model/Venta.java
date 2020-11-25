@@ -1,6 +1,8 @@
 package ar.edu.davinci.dvds20202cg3.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +41,12 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public abstract class Venta {
+public abstract class Venta implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2545181862788343597L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -47,15 +55,17 @@ public abstract class Venta {
     private Long id;
 
     @ManyToOne(targetEntity = Cliente.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="vta_cli_id", referencedColumnName="cli_id")
+    @JoinColumn(name="vta_cli_id", referencedColumnName="cli_id", nullable = false)
     private Cliente cliente;
 
     @Column(name = "vta_fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="itm_vta_id", referencedColumnName="vta_id", nullable = false)
+    /*@OneToMany(mappedBy="venta", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)*/
+    @OneToMany(mappedBy="venta", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    /*@JoinColumn(name="itm_vta_id", referencedColumnName="vta_id", nullable = false)*/
+    @JsonManagedReference
     private List<Item> items;
 
 
@@ -77,5 +87,13 @@ public abstract class Venta {
 
     public boolean esDeFecha(Date fecha) {
         return (this.fecha.compareTo(fecha) == 0) ? true : false;
+    }
+
+
+    public void addItem(Item item) {
+        if (this.items == null) {
+            this.items = new ArrayList<Item>();
+        }
+        this.items.add(item);
     }
 }

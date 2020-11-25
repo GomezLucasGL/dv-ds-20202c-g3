@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import ar.edu.davinci.dvds20202cg3.model.Venta;
-import ar.edu.davinci.dvds20202cg3.model.VentaTarjeta;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 @Entity
 @PrimaryKeyJoinColumn(name = "vta_id")
@@ -19,9 +18,14 @@ import lombok.experimental.SuperBuilder;
 
 
 @Data
+@NoArgsConstructor
 @SuperBuilder
-public class VentaTarjeta extends Venta implements Serializable{
-    private static final long serialVersionUID = -4940343384573345479L;
+public class VentaTarjeta extends Venta implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7549753306871297143L;
 
     @Column(name = "vtt_cantidad_cuotas")
     private Integer cantidadCuotas;

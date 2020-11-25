@@ -15,13 +15,12 @@ import java.io.Serializable;
 
 @Data
 @SuperBuilder
-public class VentaEfectivo implements Serializable {
+public class VentaEfectivo extends Venta implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "vta_id")
-    private Long id;
+    @Override
+    public Double conRecargo(Double importeBase) {
+        return importeBase;
+    }
     private static final long serialVersionUID = -8393218825317899807L;
 
 

@@ -1,6 +1,11 @@
 package ar.edu.davinci.dvds20202cg3.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import ar.edu.davinci.dvds20202cg3.model.Item;
+import ar.edu.davinci.dvds20202cg3.model.VentaEfectivo;
+import ar.edu.davinci.dvds20202cg3.model.VentaTarjeta;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +15,16 @@ import ar.edu.davinci.dvds20202cg3.model.Venta;
 public interface VentaService {
     public List<Venta> listAll();
     public Page<Venta> list(Pageable pageable);
-    public Venta findById(Long id);
-    public Venta save(Venta venta);
+    public Optional<Venta> findById(Long id);
+    public VentaEfectivo save(VentaEfectivo venta) throws Exception;
+    public VentaEfectivo save(VentaEfectivo ventaEfectivo, Item item) throws Exception;
+    public VentaTarjeta save(VentaTarjeta venta) throws Exception;
+    public VentaTarjeta save(VentaTarjeta ventaTarjeta, Item item) throws Exception;
     public void delete(Venta venta);
     public void delete(Long id);
     public long count();
-
+    public Venta addItem(Long id, Item item) throws Exception;
+    public Venta updateItem(Long ventaId, Long itemId, Item item) throws Exception;
+    public Venta deleteItem(Long ventaId, Long itemId) throws Exception;
 }
+

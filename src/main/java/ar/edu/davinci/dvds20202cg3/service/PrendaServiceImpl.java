@@ -3,7 +3,10 @@ package ar.edu.davinci.dvds20202cg3.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import ar.edu.davinci.dvds20202cg3.model.TipoPrenda;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PrendaServiceImpl implements PrendaService {
+    private final Logger LOGGER = LoggerFactory.getLogger(PrendaServiceImpl.class);
 
     private final PrendaRepository prendaRepository;
 
@@ -29,16 +33,13 @@ public class PrendaServiceImpl implements PrendaService {
 
     @Override
     public Page<Prenda> list(Pageable pageable) {
+        LOGGER.info("Pagegable: offset: " + pageable.getOffset() + " - pageSize:" + pageable.getPageSize());
         return prendaRepository.findAll(pageable);
     }
 
     @Override
-    public Prenda findById(Long id) {
-        Optional<Prenda> prendaOptional = prendaRepository.findById(id);
-        if (prendaOptional.isPresent()) {
-            return prendaOptional.get();
-        }
-        return null;
+    public Optional<Prenda> findById(Long id) {
+        return prendaRepository.findById(id);
     }
 
     @Override
@@ -68,4 +69,3 @@ public class PrendaServiceImpl implements PrendaService {
 
 
 }
-

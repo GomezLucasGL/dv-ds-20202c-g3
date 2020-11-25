@@ -1,23 +1,30 @@
 package ar.edu.davinci.dvds20202cg3.service;
 
-import ar.edu.davinci.dvds20202cg3.model.Prenda;
-import ar.edu.davinci.dvds20202cg3.model.TipoPrenda;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.*;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import ar.edu.davinci.dvds20202cg3.model.Prenda;
+import ar.edu.davinci.dvds20202cg3.model.TipoPrenda;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class PrendaServiceImplTests {
+class PrendaServiceImplTest {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(PrendaServiceImplTest.class);
 
     @Autowired
     private PrendaService prendaService;
@@ -27,6 +34,7 @@ public class PrendaServiceImplTests {
 
         List<Prenda> prendas = prendaService.listAll();
 
+        LOGGER.info("Prenda size:" + prendas.size());
 
         assertNotNull(prendas, "Prendas es nulo");
         assertTrue(prendas.size() > 0, "Prendas está vacio");
@@ -39,10 +47,14 @@ public class PrendaServiceImplTests {
         Pageable pageable = PageRequest.of(0, 2);
         Page<Prenda> prendas = prendaService.list(pageable);
 
+        LOGGER.info("Prenda size:" + prendas.getSize());
+        LOGGER.info("Prenda total page:" + prendas.getTotalPages());
 
         Pageable pageable1 = PageRequest.of(1, 2);
         Page<Prenda> prendas1 = prendaService.list(pageable1);
 
+        LOGGER.info("Prenda size:" + prendas1.getSize());
+        LOGGER.info("Prenda total page:" + prendas1.getTotalPages());
 
         assertNotNull(prendas, "Prendas es nulo");
         assertTrue(prendas.getSize() > 0, "Prendas está vacio");
@@ -50,16 +62,28 @@ public class PrendaServiceImplTests {
 
     @Test
     void testFindById() {
-        Prenda prenda = prendaService.findById(4L);
-
+        Optional<Prenda> prendaOptional = prendaService.findById(4L);
+        Prenda prenda = null;
+        if (prendaOptional.isPresent()) {
+            LOGGER.info("LA PRENDA FUE ENCONTRADA");
+            prenda = prendaOptional.get();
+        } else {
+            LOGGER.info("LA PRENDA NO FUE ENCONTRADA");
+        }
         assertNotNull(prenda);
         assertEquals(prenda.getDescripcion(), "Pantalon Gabardina Beige");
     }
 
     @Test
     void testFindById_withError() {
-        Prenda prenda = prendaService.findById(0L);
-
+        Optional<Prenda> prendaOptional = prendaService.findById(0L);
+        Prenda prenda = null;
+        if (prendaOptional.isPresent()) {
+            LOGGER.info("LA PRENDA FUE ENCONTRADA");
+            prenda = prendaOptional.get();
+        } else {
+            LOGGER.info("LA PRENDA NO FUE ENCONTRADA");
+        }
         assertNull(prenda);
     }
 
@@ -67,6 +91,7 @@ public class PrendaServiceImplTests {
     void testSave() {
 
 
+        LOGGER.info("Prenda count antes insert: " + prendaService.count());
         Prenda prenda = Prenda.builder()
                 .descripcion("Tapado Negro")
                 .tipo(TipoPrenda.TAPADO)
@@ -78,7 +103,7 @@ public class PrendaServiceImplTests {
         assertNotNull(prendaCreada);
         assertEquals(prenda.getDescripcion(), prendaCreada.getDescripcion());
 
-
+        LOGGER.info("Prenda count después insert: " + prendaService.count());
 
 
     }
@@ -86,13 +111,18 @@ public class PrendaServiceImplTests {
     @Test
     void testDelete() {
 
+        LOGGER.info("Prenda count antes delete: " + prendaService.count());
 
-
-        Prenda prenda = prendaService.findById(2L);
-        prendaService.delete(prenda);
-
-
-
+        Optional<Prenda> prendaOptional = prendaService.findById(2L);
+        Prenda prenda = null;
+        if (prendaOptional.isPresent()) {
+            LOGGER.info("LA PRENDA FUE ENCONTRADA");
+            prenda = prendaOptional.get();
+            prendaService.delete(prenda);
+            LOGGER.info("Prenda count después delete: " + prendaService.count());
+        } else {
+            LOGGER.info("LA PRENDA NO FUE ENCONTRADA");
+        }
     }
 
 }
