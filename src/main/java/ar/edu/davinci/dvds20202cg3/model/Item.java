@@ -48,7 +48,8 @@ public class Item implements Serializable {
     @Column(name = "itm_cantidad")
     private Integer cantidad;
 
-    @ManyToOne(targetEntity = Prenda.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    /*@ManyToOne(targetEntity = Prenda.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)*/
+    @ManyToOne(targetEntity = Prenda.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="itm_prd_id", referencedColumnName="prd_id", nullable = false)
     private Prenda prenda;
 

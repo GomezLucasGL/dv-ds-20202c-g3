@@ -233,6 +233,3 @@ public class PrendaControllerRest extends TiendaAppRest{
 
 
 }
-
-
-

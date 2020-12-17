@@ -22,6 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.davinci.dvds20202cg3.controller.TiendaApp;
+import ar.edu.davinci.dvds20202cg3.controller.view.PrendaController;
+import ar.edu.davinci.dvds20202cg3.service.PrendaService;
+import ar.edu.davinci.dvds20202cg3.model.Prenda;
+
+
 import java.util.Optional;
 
 @Controller
@@ -33,11 +39,11 @@ public class PrendaController extends TiendaApp {
     private PrendaService prendaService;
 
 
-    @GetMapping
+    /*@GetMapping
     public String viewHomePage(Model model) {
         LOGGER.info("GET - viewHomePage - /index");
         return "index";
-    }
+    }*/
 
     @GetMapping(path = "prendas/list")
     public String showPrendaPage(Model model) {

@@ -1,9 +1,12 @@
 package ar.edu.davinci.dvds20202cg3.service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+
+import javax.management.RuntimeErrorException;
 
 import ar.edu.davinci.dvds20202cg3.model.*;
 import ar.edu.davinci.dvds20202cg3.repository.VentaEfectivoRepository;
@@ -16,6 +19,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ar.edu.davinci.dvds20202cg3.repository.VentaRepository;
+
+import ar.edu.davinci.dvds20202cg3.model.Cliente;
+import ar.edu.davinci.dvds20202cg3.model.Item;
+import ar.edu.davinci.dvds20202cg3.model.Prenda;
+import ar.edu.davinci.dvds20202cg3.model.Venta;
+import ar.edu.davinci.dvds20202cg3.model.VentaEfectivo;
+import ar.edu.davinci.dvds20202cg3.model.VentaTarjeta;
+
 
 @Service
 public class VentaServiceImpl implements VentaService {

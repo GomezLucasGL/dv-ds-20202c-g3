@@ -29,4 +29,8 @@ public class Cliente {
     @Column(name = "cli_apellido")
     private String apellido;
 
+    public String getRazonSocial() {
+        return nombre + " " + apellido;
+    }
+
 }
