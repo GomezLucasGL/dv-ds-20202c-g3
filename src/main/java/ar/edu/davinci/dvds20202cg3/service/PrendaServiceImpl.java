@@ -67,5 +67,10 @@ public class PrendaServiceImpl implements PrendaService {
         return TipoPrenda.getTipoPrendas();
     }
 
+    @Override
+    public void delete(Optional<Prenda> prenda) {
+
+    }
+
 
 }

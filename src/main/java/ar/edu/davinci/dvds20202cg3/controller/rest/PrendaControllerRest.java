@@ -18,13 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ma.glasnost.orika.MapperFacade;
 
 
@@ -43,7 +37,8 @@ public class PrendaControllerRest extends TiendaAppRest{
     /**
      * Listar
      */
-    @GetMapping(path = "/prendas/all")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/prendas/all")
     public List<Prenda> getListAll() {
         LOGGER.info("listar todas las prendas");
 
@@ -117,14 +112,10 @@ public class PrendaControllerRest extends TiendaAppRest{
     }
 
 
-    /**
-     * Grabar una nueva prenda
-     *
-     * @param datosPrenda son los datos para una nueva prenda
-     * @return un prenda nueva
-     */
-    @PostMapping(path = "/prendas")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.POST, path = "/prenda/new")
     public ResponseEntity<PrendaResponse> createPrenda(@RequestBody PrendaInsertRequest datosPrenda) {
+
         Prenda prenda = null;
         PrendaResponse prendaResponse = null;
 
@@ -221,7 +212,8 @@ public class PrendaControllerRest extends TiendaAppRest{
      * @param id identificador de una prenda
      * @return
      */
-    @DeleteMapping("/prendas/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.POST, path = "/prendas/delete/{id}")
     public ResponseEntity<HttpStatus> deletePrenda(@PathVariable("id") Long id) {
         try {
             prendaService.delete(id);

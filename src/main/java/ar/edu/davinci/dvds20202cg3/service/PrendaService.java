@@ -18,7 +18,7 @@ public interface PrendaService {
     public void delete(Long id);
     public long count();
     public List<TipoPrenda> getTipoPrendas();
-
+    void delete(Optional<Prenda> prenda);
 
 }
 
