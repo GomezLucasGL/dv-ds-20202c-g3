@@ -84,7 +84,8 @@ public class PrendaControllerRest extends TiendaAppRest{
      * @param id identificador del prenda
      * @return retorna el prenda
      */
-    @GetMapping(path = "/prendas/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/prendas/{id}")
     public ResponseEntity<PrendaResponse> getPrenda(@PathVariable Long id) {
         LOGGER.info("lista al prenda solicitado");
 
@@ -152,7 +153,8 @@ public class PrendaControllerRest extends TiendaAppRest{
      * @param datosPrenda datos a modificar de la prenda
      * @return los datos de una prenda modificada
      */
-    @PutMapping("/prendas/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.PUT, path = "/prendas/edit/{id}")
     public ResponseEntity<PrendaResponse> updatePrenda(@PathVariable("id") long id,
                                                        @RequestBody PrendaUpdateRequest datosPrenda) {
 
