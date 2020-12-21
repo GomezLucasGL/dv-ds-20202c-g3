@@ -55,9 +55,8 @@ public abstract class Venta implements Serializable {
     @Column(name = "vta_id")
     private Long id;
 
-   /* @ManyToOne(targetEntity = Cliente.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)*/
-   @ManyToOne(targetEntity = Cliente.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-   @JoinColumn(name="vta_cli_id", referencedColumnName="cli_id", nullable = false)
+    @ManyToOne(targetEntity = Cliente.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name="vta_cli_id", referencedColumnName="cli_id", nullable = false)
     private Cliente cliente;
 
     @Column(name = "vta_fecha")
@@ -65,11 +64,8 @@ public abstract class Venta implements Serializable {
     private Date fecha;
 
     @OneToMany(mappedBy="venta", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    /*@OneToMany(mappedBy="venta", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)*/
-    /*@JoinColumn(name="itm_vta_id", referencedColumnName="vta_id", nullable = false)*/
     @JsonManagedReference
     private List<Item> items;
-
 
     public abstract Double conRecargo(Double importeBase);
 
@@ -106,4 +102,3 @@ public abstract class Venta implements Serializable {
         this.items.add(item);
     }
 }
-

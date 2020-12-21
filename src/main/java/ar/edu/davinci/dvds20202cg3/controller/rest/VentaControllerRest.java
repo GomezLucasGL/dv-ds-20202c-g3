@@ -13,13 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import ar.edu.davinci.dvds20202cg3.controller.TiendaAppRest;
@@ -55,7 +49,8 @@ public class VentaControllerRest extends TiendaAppRest{
     /**
      * Listar
      */
-    @GetMapping(path = "/ventas/all")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/ventas/all")
     public List<Venta> getListAll() {
         LOGGER.info("listar todas las ventas");
 
@@ -96,7 +91,8 @@ public class VentaControllerRest extends TiendaAppRest{
      * @param ventaId identificador del venta
      * @return retorna el venta
      */
-    @GetMapping(path = "/ventas/{ventaId}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/ventas/{ventaId}")
     public ResponseEntity<VentaResponse> getVenta(@PathVariable Long ventaId) {
         LOGGER.info("lista al venta solicitado");
 
@@ -130,8 +126,10 @@ public class VentaControllerRest extends TiendaAppRest{
      * @param datosVenta son los datos para una nueva venta
      * @return un venta nueva
      */
-    @PostMapping(path = "/ventas/efectivo")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.POST, path = "/ventas/efectivo")
     public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaEfectivoRequest datosVenta) {
+
         VentaResponse ventaResponse = null;
 
         VentaEfectivo venta = mapper.map(datosVenta, VentaEfectivo.class);
