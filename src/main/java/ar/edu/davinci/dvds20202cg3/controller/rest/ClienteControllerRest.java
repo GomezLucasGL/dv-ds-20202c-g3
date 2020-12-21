@@ -11,13 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ar.edu.davinci.dvds20202cg3.controller.TiendaAppRest;
 import ar.edu.davinci.dvds20202cg3.controller.rest.response.ClienteResponse;
@@ -42,7 +36,8 @@ public class ClienteControllerRest extends TiendaAppRest{
     /**
      * Listar
      */
-    @GetMapping(path = "/clientes/all")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, path = "/clientes/all")
     public List<Cliente> getListAll() {
         LOGGER.info("listar todas las clientes");
 
@@ -117,7 +112,8 @@ public class ClienteControllerRest extends TiendaAppRest{
      * @param datosCliente son los datos para una nueva cliente
      * @return un cliente nueva
      */
-    @PostMapping(path = "/clientes")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.POST, path = "/cliente/new")
     public ResponseEntity<ClienteResponse> createCliente(@RequestBody ClienteInsertRequest datosCliente) {
         Cliente cliente = null;
         ClienteResponse clienteResponse = null;
@@ -155,7 +151,8 @@ public class ClienteControllerRest extends TiendaAppRest{
      * @param datosCliente datos a modificar de la cliente
      * @return los datos de una cliente modificada
      */
-    @PutMapping("/clientes/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.PUT, path = "/cliente/update/{id}")
     public ResponseEntity<ClienteResponse> updateCliente(@PathVariable("id") long id,
                                                          @RequestBody ClienteUpdateRequest datosCliente) {
 
@@ -213,7 +210,8 @@ public class ClienteControllerRest extends TiendaAppRest{
      * @param id identificador de una cliente
      * @return
      */
-    @DeleteMapping("/clientes/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.POST, path = "/cliente/delete/{id}")
     public ResponseEntity<HttpStatus> deleteCliente(@PathVariable("id") Long id) {
         try {
             clienteService.delete(id);
